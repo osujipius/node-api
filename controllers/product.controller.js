@@ -2,7 +2,18 @@ const Product = require("../models/product.model");
 
 const getProducts = async (req, res) => {
   try {
-    const products = await Product.find({});
+    const { sortBy, order, search } = req.query;
+    let query = {};
+    if (search) {
+      query = {
+        $or: [{ name: new RegExp(search, "i") }],
+      };
+    }
+    let sort = {};
+    if (sortBy && order) {
+      sort[sortBy] = order === "desc" ? -1 : 1;
+    }
+    const products = await Product.find(query).sort(sort);
     res.status(200).json(products);
   } catch (error) {
     res.status(500).json({ message: error.message });

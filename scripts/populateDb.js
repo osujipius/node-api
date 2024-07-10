@@ -11,6 +11,9 @@ const generateProduct = () => {
     quantity: faker.number.int({ min: 1, max: 100 }),
     price: parseFloat(faker.commerce.price()),
     image: faker.image.url(),
+    createdAt: "2024-07-07T21:10:16.268Z",
+    updatedAt: "2024-07-07T21:15:22.538Z",
+    __v: 0,
   };
 };
 
